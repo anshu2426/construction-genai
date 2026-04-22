@@ -235,10 +235,15 @@ Pipeline Flow:
 
 ---
 
-## 👨‍💻 Author
+## Group Members
 
-**Anshul Yadav**  
-Engineer | DevOps | AI Enthusiast  
+| Sr No | Name            | Enrollment Number |
+|-------|-----------------|------------------|
+| 01    | Ansh Kumbhare   | EN22CS301140     |
+| 02    | Anshul Sen      | EN22CS301158     |
+| 03    | Anshul Yadav    | EN22CS301159     |
+| 04    | Armi Bhawsar    | EN22CS301194     |
+| 05    | Atharv Dubey    | EN22CS301229     |  
 
 ---
 
