@@ -43,35 +43,37 @@ The system is containerized using Docker and supports both:
 
 ---
 
-## 📂 Project Structure
-├── .github/
-│ └── workflows/
-│ └── deploy.yml # CI/CD pipeline for EC2 deployment
-│
-├── k8s/ # Kubernetes manifests
-│ ├── deployment.yaml # Defines application deployment (pods, replicas, updates)
-│ ├── service.yaml # Exposes application (ClusterIP / NodePort / LoadBalancer)
-│ └── secret.yaml # Stores sensitive data like API keys (not committed to Git)
-│
-├── construction_genai/ # Core application source code
-│ ├── app.py # Entry point - Streamlit UI
-│ ├── llm_engine.py # Handles LLM (Gemini) interactions
-│ ├── vector_db.py # Implements vector search (TF-IDF)
-│ ├── prompts.py # Stores prompt templates for AI
-│ └── data/ # Knowledge base documents for retrieval
-│
-├── Dockerfile # Defines Docker image build instructions
-├── docker-compose.yml # Multi-container orchestration (local setup)
-├── requirements.txt # Python dependencies
-│
-├── .dockerignore # Files ignored during Docker build
-├── .gitignore # Files ignored by Git
-│
-├── README.md # Project documentation
-├── DEPLOYMENT.md # AWS EC2 deployment guide
-└── MINIKUBE_SETUP.md # Kubernetes (Minikube) setup guide
-
 ---
+
+## 📂 Project Structure
+
+    .
+    ├── .github/
+    │   └── workflows/
+    │       └── deploy.yml          # CI/CD pipeline for EC2 deployment
+    │
+    ├── k8s/                        # Kubernetes manifests
+    │   ├── deployment.yaml         # Defines pods, replicas, and rolling updates
+    │   ├── service.yaml            # Exposes application (ClusterIP / NodePort / LoadBalancer)
+    │   └── secret.yaml             # Stores sensitive data like API keys (not committed)
+    │
+    ├── construction_genai/         # Core application source code
+    │   ├── app.py                  # Main Streamlit application (entry point)
+    │   ├── llm_engine.py           # Handles LLM (Google Gemini) integration
+    │   ├── vector_db.py            # Implements vector search (TF-IDF)
+    │   ├── prompts.py              # Prompt templates for AI generation
+    │   └── data/                   # Knowledge base documents
+    │
+    ├── Dockerfile                  # Docker image build instructions
+    ├── docker-compose.yml          # Local multi-container setup
+    ├── requirements.txt            # Python dependencies
+    │
+    ├── .dockerignore               # Files excluded from Docker build
+    ├── .gitignore                  # Files ignored by Git
+    │
+    ├── README.md                   # Project documentation
+    ├── DEPLOYMENT.md               # AWS EC2 deployment guide
+    └── MINIKUBE_SETUP.md           # Kubernetes (Minikube) setup guide
 
 ---
 
