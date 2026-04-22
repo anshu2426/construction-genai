@@ -26,17 +26,19 @@ The system is containerized using Docker and supports both:
 
 ---
 
+---
+
 ## 🛠️ Tech Stack
 
 | Category            | Technology |
 |--------------------|-----------|
-| Frontend           | :contentReference[oaicite:0]{index=0} |
+| Frontend           | Streamlit |
 | AI/LLM             | Google Gemini (`google-genai`) |
-| Vector Search      | :contentReference[oaicite:1]{index=1} (TF-IDF) |
-| PDF Generation     | `fpdf` |
-| Containerization   | :contentReference[oaicite:2]{index=2} |
-| Orchestration      | :contentReference[oaicite:3]{index=3} (Minikube) |
-| CI/CD              | :contentReference[oaicite:4]{index=4} |
+| Vector Search      | scikit-learn (TF-IDF) |
+| PDF Generation     | fpdf |
+| Containerization   | Docker |
+| Orchestration      | Kubernetes (Minikube) |
+| CI/CD              | GitHub Actions |
 | Cloud Deployment   | AWS EC2 |
 
 ---
