@@ -1,90 +1,259 @@
-# Construction Content Generator
+# 🏗️ Construction Content Generator
 
-AI-powered construction site report generator built with Streamlit.
+An AI-powered construction site report generator built using Streamlit and modern DevOps practices. This system leverages LLMs and vector search to generate professional, structured construction reports efficiently.
 
-## Project Structure
+---
 
-```
-.
+## 📌 Project Overview
+
+The **Construction Content Generator** is a smart AI application designed to automate construction report creation. It integrates **LLM-based content generation** with **vector-based document retrieval** to produce accurate and context-aware reports.
+
+The system is containerized using Docker and supports both:
+- Local development
+- Production deployment via CI/CD pipelines
+
+---
+
+## 🚀 Key Features
+
+- 🧠 AI-powered report generation using Google Gemini
+- 📄 Professional PDF report generation
+- 🔍 Vector-based document search (TF-IDF)
+- 🌐 Modern and responsive UI with Streamlit
+- 🐳 Dockerized application for consistent environments
+- ⚙️ CI/CD pipeline for automated deployment
+- ☁️ Supports deployment on AWS EC2 and Kubernetes (Minikube)
+
+---
+
+## 🛠️ Tech Stack
+
+| Category            | Technology |
+|--------------------|-----------|
+| Frontend           | :contentReference[oaicite:0]{index=0} |
+| AI/LLM             | Google Gemini (`google-genai`) |
+| Vector Search      | :contentReference[oaicite:1]{index=1} (TF-IDF) |
+| PDF Generation     | `fpdf` |
+| Containerization   | :contentReference[oaicite:2]{index=2} |
+| Orchestration      | :contentReference[oaicite:3]{index=3} (Minikube) |
+| CI/CD              | :contentReference[oaicite:4]{index=4} |
+| Cloud Deployment   | AWS EC2 |
+
+---
+
+## 📂 Project Structure
 ├── .github/
-│   └── workflows/
-│       └── deploy.yml          # CI/CD pipeline for EC2 deployment
-├── k8s/                        # Kubernetes manifests
-│   ├── deployment.yaml         # Deployment configuration
-│   ├── service.yaml            # Service configuration
-│   └── secret.yaml             # Secret for API keys (gitignored)
-├── construction_genai/         # Source code
-│   ├── app.py                  # Main Streamlit application
-│   ├── llm_engine.py           # LLM integration
-│   ├── vector_db.py            # Vector database for document search
-│   ├── prompts.py              # AI prompts
-│   └── data/                   # Knowledge base documents
-├── Dockerfile                  # Container image definition
-├── docker-compose.yml          # Docker Compose configuration
-├── requirements.txt            # Python dependencies
-├── .dockerignore              # Docker build exclusions
-├── .gitignore                 # Git exclusions
-├── README.md                  # Project documentation
-├── DEPLOYMENT.md              # AWS EC2 deployment guide
-└── MINIKUBE_SETUP.md          # Kubernetes/Minikube setup guide
+│ └── workflows/
+│ └── deploy.yml # CI/CD pipeline for EC2 deployment
+│
+├── k8s/ # Kubernetes manifests
+│ ├── deployment.yaml # Defines application deployment (pods, replicas, updates)
+│ ├── service.yaml # Exposes application (ClusterIP / NodePort / LoadBalancer)
+│ └── secret.yaml # Stores sensitive data like API keys (not committed to Git)
+│
+├── construction_genai/ # Core application source code
+│ ├── app.py # Entry point - Streamlit UI
+│ ├── llm_engine.py # Handles LLM (Gemini) interactions
+│ ├── vector_db.py # Implements vector search (TF-IDF)
+│ ├── prompts.py # Stores prompt templates for AI
+│ └── data/ # Knowledge base documents for retrieval
+│
+├── Dockerfile # Defines Docker image build instructions
+├── docker-compose.yml # Multi-container orchestration (local setup)
+├── requirements.txt # Python dependencies
+│
+├── .dockerignore # Files ignored during Docker build
+├── .gitignore # Files ignored by Git
+│
+├── README.md # Project documentation
+├── DEPLOYMENT.md # AWS EC2 deployment guide
+└── MINIKUBE_SETUP.md # Kubernetes (Minikube) setup guide
 
-```
+---
 
-## Features
+---
 
-- AI-powered content generation using Google Gemini
-- Vector-based document search
-- Professional PDF report generation
-- Modern, responsive UI
+### 📖 Structure Explanation
 
-## Local Development
+- **.github/workflows/**  
+  Contains CI/CD pipeline configuration.  
+  `deploy.yml` automates the process of building, pushing, and deploying the application.
 
-```bash
-# Install dependencies
-pip install -r requirements.txt
+- **k8s/**  
+  Kubernetes configuration files for container orchestration:
+  - `deployment.yaml` → Defines pods, replicas, and rolling updates  
+  - `service.yaml` → Exposes the application to users  
+  - `secret.yaml` → Stores sensitive data like API keys securely  
 
-# Run the application
-streamlit run construction_genai/app.py
-```
+- **construction_genai/**  
+  Core application logic:
+  - `app.py` → Main Streamlit UI (entry point)  
+  - `llm_engine.py` → Handles interaction with LLM (Google Gemini)  
+  - `vector_db.py` → Implements document retrieval using TF-IDF  
+  - `prompts.py` → Stores prompt templates  
+  - `data/` → Knowledge base for contextual responses  
 
-### Using Docker Compose
+- **Dockerfile**  
+  Defines how the application is containerized into a Docker image.
 
-```bash
-# Set Docker host for Docker Desktop (if using desktop-linux context)
-export DOCKER_HOST=unix:///home/anshul/.docker/desktop/docker.sock
+- **docker-compose.yml**  
+  Helps run the application locally using containers.
 
-# Run with Docker Compose
-docker-compose up -d
+- **requirements.txt**  
+  Lists all Python dependencies required to run the project.
 
-# View logs
-docker-compose logs -f
+- **.dockerignore & .gitignore**  
+  Prevent unnecessary or sensitive files from being included in builds or version control.
 
-# Stop the service
-docker-compose down
-```
+- **Documentation Files**  
+  - `README.md` → Project overview and usage  
+  - `DEPLOYMENT.md` → AWS EC2 deployment steps  
+  - `MINIKUBE_SETUP.md` → Local Kubernetes setup  
 
-## Deployment
+---
 
-### Production (AWS EC2)
-See [DEPLOYMENT.md](DEPLOYMENT.md) for AWS EC2 deployment instructions using CI/CD.
+## 🧠 How It Works
 
-### Local Development (Minikube/Kubernetes)
-See [MINIKUBE_SETUP.md](MINIKUBE_SETUP.md) for running the application on Kubernetes locally using Minikube. This is ideal for learning Kubernetes concepts and demonstration purposes.
+1. User inputs construction-related requirements  
+2. The system processes input using predefined prompts  
+3. Vector database retrieves relevant documents  
+4. LLM generates structured construction content  
+5. Output is displayed via Streamlit UI and can be exported as PDF  
 
-## Environment Variables
+---
 
-- `GOOGLE_API_KEY`: Required for Google Gemini AI integration
+## ⚙️ Setup & Execution Steps
 
-### Local Development (.env)
-For local development (Streamlit directly), use the `.env` file (already configured with your API key).
+### 🔹 Local Development
 
-### Kubernetes (Secret)
-For Kubernetes deployment, use `k8s/secret.yaml` (already configured with your API key).
+#### Step 1: Clone the Repository  
+`git clone <your-repo-url>`  
+`cd construction-content-generator`
 
-## Tech Stack
+#### Step 2: Install Dependencies  
+`pip install -r requirements.txt`
 
-- **Frontend**: Streamlit
-- **AI**: Google Gemini (google-genai)
-- **Vector Search**: scikit-learn (TF-IDF)
-- **PDF Generation**: fpdf
-- **Deployment**: Docker, GitHub Actions, AWS EC2
+#### Step 3: Run the Application  
+`streamlit run construction_genai/app.py`
+
+---
+
+### 🐳 Docker Setup
+
+#### Step 1: (Optional) Set Docker Host  
+`export DOCKER_HOST=unix:///home/anshul/.docker/desktop/docker.sock`
+
+#### Step 2: Build & Start Containers  
+`docker-compose up -d`
+
+#### Step 3: View Logs  
+`docker-compose logs -f`
+
+#### Step 4: Stop Containers  
+`docker-compose down`
+
+---
+
+### 🚀 Deployment (AWS EC2 - CI/CD)
+
+#### Step 1: Push Code to GitHub  
+`git add .`  
+`git commit -m "Deploy application"`  
+`git push origin main`
+
+#### Step 2: CI/CD Pipeline Execution  
+
+Pipeline Flow:  
+`Git Push → GitHub Actions → Build Docker Image → Push to Docker Hub → Deploy to EC2`
+
+#### Step 3: Verify Deployment  
+- Check running containers on EC2  
+- Access application using EC2 Public IP  
+
+---
+
+### ⚙️ Kubernetes (Minikube)
+
+#### Step 1: Start Minikube  
+`minikube start`
+
+#### Step 2: Apply Kubernetes Configurations  
+`kubectl apply -f k8s/deployment.yaml`  
+`kubectl apply -f k8s/service.yaml`
+
+#### Step 3: Verify Resources  
+`kubectl get pods`  
+`kubectl get services`
+
+#### Step 4: Access Application  
+`minikube service <service-name>`
+
+---
+
+## 🔄 CI/CD Pipeline (Detailed Stages)
+
+1. **Checkout Code**  
+   Pull latest code from repository  
+
+2. **Build Docker Image**  
+   Build container image using Dockerfile  
+
+3. **Docker Authentication**  
+   Login to Docker Hub using credentials  
+
+4. **Push Docker Image**  
+   Push image to Docker Hub repository  
+
+5. **Deployment to EC2**  
+   Pull latest image and run container on server  
+
+6. **Verification**  
+   Ensure application is live and accessible  
+
+---
+
+## 📦 Scalability & Architecture
+
+- Stateless containerized application  
+- Easily deployable across multiple environments  
+- Supports horizontal scaling using Kubernetes  
+- Modular design (LLM + Vector DB separation)  
+
+---
+
+## 📈 Future Enhancements
+
+- 🔹 Integrate advanced vector databases (FAISS / Pinecone)  
+- 🔹 Add user authentication & role-based access  
+- 🔹 Implement monitoring (Prometheus + Grafana)  
+- 🔹 Enable autoscaling (Kubernetes HPA)  
+- 🔹 Improve prompt engineering for higher accuracy  
+
+---
+
+## 👨‍💻 Author
+
+**Anshul Yadav**  
+Engineer | DevOps | AI Enthusiast  
+
+---
+
+## 🎓 Academic Context
+
+- Institution: Medicaps University  
+- Program: Datagami Skill-Based Program  
+- Academic Year: 2025–2026  
+
+---
+
+## 📄 License
+
+This project is for educational and demonstration purposes.
+
+---
+
+## ⭐ Support
+
+If you found this project useful, consider giving it a star ⭐ on GitHub.
+
+---
